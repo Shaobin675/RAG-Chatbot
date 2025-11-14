@@ -1,0 +1,141 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4a00e0, #8e2de2); /* fancy purple/blue */
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.login {
+  margin-bottom: 10px;
+}
+
+#chatContainer {
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 10px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* General message styling */
+.message {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 12px;
+  border-radius: 15px;
+  margin: 5px;
+  max-width: 70%;
+  word-wrap: break-word;
+  position: relative;
+}
+
+/* Avatar style */
+.message .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* ---------- BOT MESSAGE ---------- */
+.message.bot {
+  background-color: #6ec1e4;
+  align-self: flex-start;
+  color: #fff;
+  flex-direction: row; /* Avatar on left, text on right */
+}
+
+.message.bot .avatar {
+  margin-right: 8px;
+}
+
+/* ---------- USER MESSAGE ---------- */
+.message.user {
+  background-color: #a17cf3;
+  color: #fff;
+  align-self: flex-end; /* Push to right side */
+  flex-direction: row-reverse; /* Avatar on right */
+  text-align: right;
+}
+
+.message.user .avatar {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* ---------- SYSTEM / WARNING ---------- */
+.message.warning {
+  background-color: #f8d7da;
+  color: #721c24;
+  font-weight: bold;
+  align-self: center;
+}
+
+/* ---------- INPUT AREA ---------- */
+.inputArea {
+  display: flex;
+  margin-top: 5px;
+}
+
+#userInput {
+  flex: 1;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+#sendBtn,
+button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border-radius: 12px;
+  border: none;
+  background-color: #7209b7;
+  color: white;
+  cursor: pointer;
+}
+
+#sendBtn:hover,
+button:hover {
+  background-color: #560bad;
+}
+
+/* ---------- PROGRESS BAR ---------- */
+#progressContainer {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+#progressBar {
+  width: 100%;
+  height: 100%;
+  background-color: #ff4d4d;
+  border-radius: 4px;
+  transition: width 1s linear;
+}
+
+
+.avatar {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  object-fit: cover;
+}
