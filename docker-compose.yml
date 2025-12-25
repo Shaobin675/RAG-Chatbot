@@ -74,6 +74,18 @@ services:
     ports:
       - "8003:8003"
 
+  upload-service:
+    build: ./upload-service
+    depends_on:
+      - postgres
+      - kafka
+
+  ingestion-worker:
+    build: ./ingestion-worker
+    depends_on:
+      - kafka
+      - postgres
+      
 volumes:
   - pgdata:/var/lib/postgresql/data
   - redisdata:/data

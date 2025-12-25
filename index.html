@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multiuser Chat</title>
+  <title>RAG Chat Platform</title>
   <!-- Tailwind CSS and custom index.css -->
   <link rel="stylesheet" href="/index.css">
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="
+      default-src 'self';
+      connect-src 'self' https://api.xxx.com;
+      script-src 'self';
+      style-src 'self' 'unsafe-inline';
+    "
+  />
 </head>
 <body class="bg-gray-900 text-white">
   <!-- React will mount here -->
