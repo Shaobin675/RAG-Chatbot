@@ -6,21 +6,23 @@ The system is designed using a microservice-friendly architecture, optimized for
 
 🧠 Core Technologies
 
-LangGraph – Workflow orchestration and stateful LLM execution
+LangGraph – Workflow orchestration and stateful LLM execution (Completed)
 
-LangChain – Prompting, document loading, and chaining
+LangChain – Prompting, document loading, and chaining (Completed)
 
-OpenAI / LLM APIs – Language understanding and generation
+OpenAI / LLM APIs – Language understanding and generation (Completed)
 
 Vector Database – FAISS (current), Pinecone (planned)
 
-FastAPI – Async API and WebSocket support
+FastAPI – Async API and WebSocket support (Completed)
 
-PostgreSQL – Persistent chat and metadata storage (planned)
+PostgreSQL – Persistent chat and metadata storage (Completed)  
 
-Async Python (asyncio) – High-throughput I/O handling
+Async Python (asyncio) – High-throughput I/O handling (Completed)
 
-Docker – Containerized deployment and environment consistency
+Docker – Containerized deployment and environment consistency (Completed)
+
+S3 - Store uploaded documents (Completed)
  
 
  
