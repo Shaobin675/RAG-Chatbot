@@ -85,7 +85,76 @@ services:
     depends_on:
       - kafka
       - postgres
-      
+
+  # ── Temporal dependencies ──────────────────────────────────────────────────
+
+  temporal-db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal
+      POSTGRES_DB: temporal
+    volumes:
+      - temporal-db-data:/var/lib/postgresql/data
+    networks:
+      - rag-network
+
+  temporal:
+    image: temporalio/auto-setup:1.24
+    depends_on:
+      - temporal-db
+    environment:
+      DB: postgres18
+      DB_PORT: 5432
+      POSTGRES_USER: temporal
+      POSTGRES_PWD: temporal
+      POSTGRES_SEEDS: temporal-db
+    ports:
+      - "7233:7233"   # gRPC frontend (workers + clients connect here)
+    networks:
+      - rag-network
+
+  temporal-ui:
+    image: temporalio/ui:2.26
+    depends_on:
+      - temporal
+    environment:
+      TEMPORAL_ADDRESS: temporal:7233
+    ports:
+      - "8080:8080"   # Temporal Web UI — workflow visibility dashboard
+    networks:
+      - rag-network
+
+  # ── Temporal ingestion worker ──────────────────────────────────────────────
+
+  temporal-worker:
+    build:
+      context: ./temporal-worker
+      dockerfile: Dockerfile
+    depends_on:
+      - temporal
+      - redis
+    environment:
+      TEMPORAL_HOST: temporal:7233
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+    volumes:
+      - faiss-data:/data/faiss_index
+    networks:
+      - rag-network
+    restart: unless-stopped
+
+volumes:
+  temporal-db-data:
+  faiss-data:
+
+networks:
+  rag-network:
+    external: true  
+        
 volumes:
   - pgdata:/var/lib/postgresql/data
   - redisdata:/data
